@@ -1,0 +1,51 @@
+<div class="login_container">
+
+
+	<div class="container">	
+		<div class="row">
+
+			<div class="col-sm-6 left_col">
+				<div class="wrap">
+
+					<!--after logining-->
+					<div class="logo_signed" ng-show='CURRENT_USER'>
+						<i class="fa fa-hand-peace-o"></i>
+						<span>Thanks for Joining!</span>
+					</div>
+					<!--end after logginnig-->
+					<div class="login_card" ng-if="!CURRENT_USER" login-registr>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-sm-6 right_col">
+				<div class="txt_container">
+					<p class="title">About</p>
+					<p>It Shpora - <strong>SIMPLE & FREE</strong> code notes WAREHOUSE.
+					<p>It Shpora helps:
+					<ul class='list-6'>
+						<li><span>Keep order of code notes</span></li>
+						<li><span>Quick add NEW NOTES to storage</span></li>
+						<li><span>Quick SEARCH code note over storage</span></li>
+					</ul>
+					<div ng-show="CURRENT_USER==false">
+						<br><span>If you are <span class="highlight-yellow">UNSIGNED</span> - you can  see my CODE NOTES as an instance. 
+				<!--		<br>
+						<br>But such performance not include some CRUDE features with code notes.
+						<br>  -->
+					</div>  <!--wrap for the ng-show only of entire block-->
+
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+</div>

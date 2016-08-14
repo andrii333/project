@@ -1,0 +1,130 @@
+<html ng-app="app">
+
+
+<head>
+
+
+
+
+
+
+
+	<script src="./static/lib/angular.min.js"></script>
+	<script src="./static/lib/angular-ui-router.js"></script>
+	<script src="./static/lib/jquery.min.js"></script>
+	<script src="./static/custom/cap.js"></script>
+	<script src="./static/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./static/lib/ui-bootstrap-tpls-0.14.3.js"></script>   
+<!--	<script src="./static/lib/angular-animate.min.js"></script>  -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./static/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./static/custom/cap.css">
+
+
+	<link href="./static/brave/css/animate.min.css" rel="stylesheet" type="text/css">
+	<link href="./static/brave/css/font-awesome.css" rel="stylesheet" type="text/css">
+<!--	<link href="./static/brave/css/style.css" rel="stylesheet" type="text/css">   -->
+
+</head>
+
+
+
+<body>
+
+<div ng-controller="MainController">
+
+
+    <div class="menu_container">
+
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand brand" href="#">It Shpora</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li ui-sref-active="active"><a ui-sref="login">A</a></li>
+					<li ui-sref-active="active"><a ui-sref="notes">Notes</a></li>
+					<li ui-sref-active="active"><a ui-sref="contact">Contact</a></li>
+					<li class="question_icon" ng-if="CURRENT_USER" ng-click="question()">
+						<a href="#">
+							<i class="fa fa-question-circle"></i>
+						</a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right right_menu">
+
+					<form class="form-inline" ng-show="!CURRENT_USER" >
+
+						<!--alert for not success login-->
+						<div id="re" class="alert alert-danger animated fadeIn" ng-show="show_alert!=false" ng-animate>
+							<span class="glyphicon glyphicon-exclamation-sign"></span>	
+							{{show_alert}}
+							<span class="glyphicon glyphicon-remove close_alert" ng-click="close_alert()"></span>
+						</div>
+						<!--end alert-->
+
+
+						<!--spinner for login loading-->
+						<i class="fa fa-spinner fa-spin" ng-show="login_preloader"></i>
+						<!--end spinner-->
+
+						<!--login form-->
+						<div class="form-group" ng-show="show_alert==false">
+							<label class="sr-only" for="exampleInputEmail3">Email address</label>
+							<input type="text" ng-model="u_name" class="form-control input-sm" id="exampleInputEmail3" placeholder="Your Name">
+						</div>
+						<div class="form-group" ng-show="show_alert==false">
+							<label class="sr-only" for="exampleInputPassword3">Password</label>
+							<input type="password" ng-model="u_pass" class="form-control input-sm" id="exampleInputPassword3" placeholder="Password">
+						</div>
+						<button ng-show="show_alert==false" type="submit" class="btn btn-default btn-sm" ng-click="login()">Log in</button>
+
+						<!--end login form-->
+
+					</form>
+
+
+
+	<!--				<li class="sign_in" ng-if="!CURRENT_USER"><div class="wrap" ng-click="login()"><span>Log In</span><i class="fa fa-sign-in size"></i></div></li>  -->
+		
+					<!--user name and sign out icon-->
+					<li class="sign_out" ng-if="CURRENT_USER"><div class="wrap"><i ng-show="logout_preloader" class="fa fa-spinner fa-spin"></i> <i class="fa fa-user size"></i><span>{{CURRENT_USER}}</span><i ng-click="logout()" class="fa fa-sign-out size"></i></div></li>
+					<!--and user name and sign out icon-->	
+
+				</ul>  
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
+
+
+
+    </div>  <!--close MENU_CONTAINER-->
+
+
+
+    <div ui-view></div>
+
+</div>  <!--close wrap for MainController-->
+
+
+
+
+</body>
+
+
+
+</html>
