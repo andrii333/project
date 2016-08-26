@@ -1263,6 +1263,180 @@ app.directive('loginRegistr',function($http,$state)
 
 
 
+app.directive('cropImg',function($timeout)
+	{
+	return {
+		//scope:{},
+		link:function(scope,element,attr)
+			{
+			scope.get_dimensions = get_dimensions;
+			scope.resize = resize;
+
+			var viewport = attr['cropImg']===''?false:true;
+
+			function resize()
+				{
+				$timeout(scope.get_dimensions,0);
+				}
+
+			//$(window).on('resize',scope.resize);
+			element.on('load',scope.get_dimensions);
+
+			//scope.get_dimensions();	
+			function get_dimensions()
+				{
+				var parent_element = element.parent();
+
+
+				//!!! not conventional case - for safe case get transform property, cache it, remove, and return after all dimensions will be ready
+				var cache_transform_parent = parent_element.css('transform');
+				parent_element.css(
+					{
+					'transform':'',
+					'visibility':'hidden'
+					});
+
+
+				var cache_transform_element = element.css('transform');
+				element.css(
+						{
+						'transform':'',
+						'visibility':'hidden'
+						});
+
+				if (viewport==false)
+					{
+					var parent_dimensions = parent_element[0].getBoundingClientRect();
+					var h = parent_dimensions['height'];
+					var w = parent_dimensions['width'];
+					}
+				else
+					{
+					var h = window.innerHeight;
+					var w = window.innerWidth;
+					}
+
+				var img_dimensions = element[0].getBoundingClientRect();
+				var h_img = img_dimensions['height'];
+				var w_img = img_dimensions['width'];
+				var koef = w/w_img;
+				//debugger;
+				if (h_img*koef>=h)
+					{
+					element.css(
+						{
+						'width':w+'px',
+						'height':'auto',
+						'margin-left':'0%'
+						});
+					//element.css({'width':'100%','height':'auto'});
+					}
+				else
+					{
+					var new_w_img = w_img*(h/h_img);
+					var rate = (1-new_w_img/w)/2*100;
+					//debugger;
+					element.css(
+						{
+						'width':'auto',
+						'height':h+'px',
+						'margin-left':rate+'%'
+						});
+					}
+				//console.log(h,w,h_img,w_img,rate,new_w_img);
+				//debugger;	
+				//return previous state (transforms and visibility)
+				parent_element.css(
+					{
+					'transform':cache_transform_parent,
+					'visibility':'visible'
+					});
+				element.css(
+						{
+						'transform':cache_transform_element,
+						'visibility':'visible'
+						});
+
+
+
+				//debugger;
+				}
+
+			}
+	
+
+	}
+
+
+	})
+
+
+
+
+app.directive('animateScroll',function($window)
+	{
+	return {
+		scope:{},
+		link: function(scope,element,attrs)
+			{
+
+			scope.init = init;
+			scope.getDimensions = getDimensions;
+			var el = element[0];
+			var when_scroll = attrs['whenScroll']===undefined?undefined:parseInt(attrs['whenScroll'])/100;
+
+			scope.init();
+
+			function getDimensions()
+				{
+				scope.elemTopPos = element[0].getBoundingClientRect()['top'];
+				scope.viewportHeight = $window.innerHeight;
+				}
+
+			function init()
+				{
+				scope.getDimensions();
+		//		el.style['opacity'] = '0';
+				scope.finished = false; //animation is finished (prevent scrol handling)
+				}
+
+
+			//determine when to fire animation
+			$(window).scroll(function()
+				{
+				if (scope.finished==true){return false;}
+		
+				var scroll_top = $(window).scrollTop();
+				var koef = scroll_top/scope.viewportHeight;
+				if (when_scroll!=undefined)
+					{
+					if (koef>when_scroll)
+						{
+						$(el).addClass(attrs['animateScroll']); //set animated class
+						scope.finished = true;
+						scope.$apply();
+						}
+					return false
+					}
+
+				var dist = -scroll_top + scope.elemTopPos;
+				if (dist/scope.viewportHeight<0.7)
+					{
+					$(el).addClass(attrs['animateScroll']); //set animated class
+					scope.finished = true;
+					scope.$apply();
+					}		
+				})
+
+				
+
+			}
+		
+
+		}
+
+
+	})
 
 
 
