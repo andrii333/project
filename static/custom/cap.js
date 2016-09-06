@@ -1072,9 +1072,9 @@ app.directive('loginRegistr',function($http,$state)
 					{
 					console.log('ffff');
 					element.css('width','400px');
-					element.css('padding','30px 30px 30px 30px');
-					element.css('border-radius','5px');
-					element.css('background','white');
+				//	element.css('padding','30px 30px 30px 30px');
+				//	element.css('border-radius','5px');
+				//	element.css('background','white');
 					element.css('margin','30px auto 0px auto');
 					}
 
@@ -1197,6 +1197,9 @@ app.directive('loginRegistr',function($http,$state)
 			{
 			/*`
 		<div ng-switch on="nav_state">
+			<div class="img_container">
+				<img src="./static/img/bg.jpg" class="bg_img_" crop-img="viewport">
+			</div>
 			<form ng-switch-when="login">
 				<h2 class="form-signin-heading">Please Log in</h2>
 				<br>
@@ -1222,7 +1225,7 @@ app.directive('loginRegistr',function($http,$state)
 
 
 			<form ng-switch-when="signin" class="bs-docs-example form-horizontal">
-				<h2 class="form-signin-heading">Please, Sign In</h2>
+				<h2 class="form-signin-heading">Sign Up</h2>
 				<hr class="bs-docs-separator"></hr>
 
 				<label>Input you email address</label>
@@ -1278,16 +1281,13 @@ app.directive('cropImg',function($timeout)
 				{
 				$timeout(scope.get_dimensions,0);
 				}
-
 			//$(window).on('resize',scope.resize);
 			element.on('load',scope.get_dimensions);
-
 			//scope.get_dimensions();	
 			function get_dimensions()
 				{
+				
 				var parent_element = element.parent();
-
-
 				//!!! not conventional case - for safe case get transform property, cache it, remove, and return after all dimensions will be ready
 				var cache_transform_parent = parent_element.css('transform');
 				parent_element.css(
