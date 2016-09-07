@@ -3,6 +3,38 @@
 /* CAPSULEFOR <default:angularjs_frame;OPEN>  */
 
 
+
+.btn-primary
+	{
+	border-radius:0px;
+	background:#D654AA;
+	border-width:0px;
+
+	box-shadow:0px 2px 4px rgb(177, 177, 177);
+	}
+
+
+.btn-primary:hover
+	{
+	background:#A71776 !important;
+	border-width:0px !important;
+	box-shadow:0px 4px 12px 2px rgb(185, 185, 185);
+	}
+
+
+.btn-primary:active
+	{
+	background:#8A0A5E !important
+	border-width:0px !important;
+	}
+
+.btn-primary:focus
+	{
+	background:#A71776 !important;
+	border-width:0px !important;
+	}
+
+
 @font-face
 	{
 	font-family:"Myriad";
@@ -598,12 +630,34 @@
 .menu_container .brand
 	{
 	margin-left:0px;
-	color:#FF760A;
+	-color:#FF760A;
+	color:#E97FC5 !important;
+	font-weight:bold;
+	text-transform:uppercase;
+	background:rgba(216, 216, 216,0.5);
+	text-shadow:0px 1px 1px rgb(180, 0, 159);
+	border-right:1px solid rgb(196, 196, 196);
 	font-size:25px;
+
 	}
 
+.menu_container .brand:hover
+	{
+	background:rgb(182, 181, 181);
+	color:#C93897 !important;
+	}
 
+.menu_container .navbar
+	{
+	box-shadow:0px 0px 5px black;
+	background:rgba(0,0,0,0.5);
+	}
 
+.menu_container .navbar-inverse
+	{
+	border-width:0px;
+	-box-shadow:0px 4px 5px rgb(185, 185, 185);
+	}
 
 .menu_container .top_menu
 	{
@@ -619,9 +673,17 @@
 
 	}
 
+
+.menu_container .navbar-nav li
+	{
+	font-size:20px;
+	}
+
+
+
 .menu_container .navbar-nav li:first-of-type a
 	{
-	color:red;
+	-color:red;
 	}
 
 
@@ -754,6 +816,34 @@
 	{
 	color:rgb(172, 179, 250);
 	}
+
+
+
+.menu_container .right_menu .form-control
+	{
+	border-radius:0px;
+	}
+
+
+.menu_container .right_menu .btn-default
+	{
+	color:white;
+	background:rgb(76, 105, 255);
+	border-radius:0px;
+	border-color:rgb(46, 54, 97);
+	}
+
+
+.menu_container .right_menu input:focus
+	{
+	border-color:gray;
+	box-shadow:0px 2px 10px -4px gray inset;
+	color:rgb(139, 139, 139);
+
+	}
+
+
+
 
 
 
@@ -1278,7 +1368,6 @@
 
 
 
-
 .login_container .logo_signed i
 	{
 	text-shadow:0px 0px 3px black;
@@ -1318,6 +1407,15 @@
 	border-radius:5px;
 	}
 
+
+
+
+
+.login_container .login_card .form-control
+	{
+
+	border-radius:0px;
+	}
 
 
 .login_container .login_slide_animation
@@ -1437,7 +1535,10 @@
 	}
 
 
-
+.login_container .txt_container .signed a
+	{
+	box-shadow:0px 2px 4px rgb(126, 126, 126);
+	}
 
 
 /*red point for list of elements "it shpora helps"*/
@@ -1448,6 +1549,9 @@
 	color:red;
 	display:none;
 	}
+
+
+
 
 .login_container .right_col .txt_container .li_display
 	{

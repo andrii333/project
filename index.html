@@ -49,13 +49,13 @@
 					<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand brand" href="#">It Shpora</a>
+				<a class="navbar-brand brand" ui-sref="login">It Shpora</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ui-sref-active="active"><a ui-sref="login">A</a></li>
+					<li ui-sref-active="active"><a ui-sref="login">About</a></li>
 					<li ui-sref-active="active"><a ui-sref="notes">Notes</a></li>
 					<li ui-sref-active="active"><a ui-sref="contact">Contact</a></li>
 					<li class="question_icon" ng-if="CURRENT_USER" ng-click="question()">
@@ -91,7 +91,7 @@
 							<label class="sr-only" for="exampleInputPassword3">Password</label>
 							<input type="password" ng-model="u_pass" class="form-control input-sm" id="exampleInputPassword3" placeholder="Password">
 						</div>
-						<button ng-show="show_alert==false" type="submit" class="btn btn-default btn-sm" ng-click="login()">Log in</button>
+						<a role="button" ng-show="show_alert==false" type="submit" class="btn btn-default btn-sm" ng-click="login()">Log in</a>
 
 						<!--end login form-->
 
