@@ -1,5 +1,7 @@
 <div class="notes_container">
+	<img src="./static/img/bg.jpg" crop-img="viewport">
 	<div class="search_block">
+
 		<div class="search_input">
 
 			<form class="form-horizontal">
@@ -7,7 +9,7 @@
 <!--					<label class="col-sm-3 control-label" for="formGroupInputLarge">SEARCH</label>  -->
 					<div class="col-sm-12">
 						<div class="form-group input_container">
-							<input ng-model="query" ng-model-options="{debounce:{'default':300}}" class="form-control" type="text" id="formGroupInputLarge" placeholder="Search text">
+							<input ng-model="query" ng-model-options="{debounce:{'default':300}}" class="form-control" type="text" id="formGroupInputLarge">
 							<i ng-show="!search_loading" class="fa fa-search"></i>
 							<i ng-show="search_loading" class="fa fa-cog fa-spin"></i>
 						</div>
@@ -16,7 +18,7 @@
 			</form>
 		</div>
 
-		<div class="navs_container">
+		<div class="navs_container animated slideInUp">
 			<button type="button" ng-click="nav_state='quick_add'" ng-class="{active:nav_state=='quick_add'}" class="btn btn-default add_btn">
 				<i class="fa fa-plus-circle"></i> Quick Add
 			</button>
