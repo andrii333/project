@@ -545,6 +545,9 @@ app.controller('ModalRenameSectionController',function($scope,$http,$uibModalIns
 	$scope.loading = false;
 	$scope.show_alert = false;
 	$scope.new_section_name = $scope.section_name['name'];
+
+	//autofocus
+	setTimeout(function(){$('.modal input').focus()},500);
 	$scope.submit_modal = function()
 		{
 	
@@ -788,6 +791,8 @@ app.controller('ModalEditNoteController', function($scope,$http,$uibModalInstanc
 	$scope.comment = $scope.clicked_note['_source']['comment'];
 	$scope.loading = false;
 
+	setTimeout(function(){$('.modal textarea')[0].focus()},500);
+
 	$scope.submit_modal = function()
 		{
 		if ($scope.comment==''||$scope.code_note=='')
@@ -887,6 +892,7 @@ app.controller('ModalAddSectionController', function($scope,$http,$uibModalInsta
 	$scope.loading = false;
 	$scope.show_alert = false;
 
+	setTimeout(function(){$('.modal input').focus()},500);
 
 	$scope.submit_modal = function()
 		{
@@ -931,6 +937,8 @@ app.controller('ModalAddNotesController', function($scope,$http,$uibModalInstanc
 	$scope.show_alert = false;
 
 	$scope.loading = false;
+
+	setTimeout(function(){$('.modal textarea')[0].focus()},500);
 
 
 	$scope.submit_modal = function()
@@ -1498,7 +1506,6 @@ app.directive('scrollUp',function()
 			{
 			//if (flag==true){return false};
 			scroll_pos = $('body').scrollTop();
-			console.log(scroll_pos);
 			show_hide();
 			})
 
@@ -1509,7 +1516,21 @@ app.directive('scrollUp',function()
 	})
 
 
+app.directive('highlight',function($timeout)
+	{
+	return {
+	link:function(scope,element)
+		{
+		$timeout(function()
+			{
+			hljs.highlightBlock(element[0]);
+			})
+		}
 
+	}
+
+
+	})
 
 
 

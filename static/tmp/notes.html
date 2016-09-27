@@ -155,14 +155,18 @@
 				</h3>
 
 
-				<div ng-repeat="item in notes track by $index" id="{{item['_id']}}" class="item" ng-mouseover="$parent.show_box_btn[item['_id']]=true" ng-mouseout="$parent.show_box_btn[item['_id']]=false">
+				<div ng-repeat="item in notes track by $index" id="{{item['_id']}}" 
+					class="item" 
+					ng-mouseover="$parent.show_box_btn[item['_id']]=true" 
+					ng-mouseout="$parent.show_box_btn[item['_id']]=false"
+					>
 					<div class="box_btns" ng-show="$parent.show_box_btn[item['_id']]">
 						<i ng-click="dispatch_note(item)" ng-show="CURRENT_USER!=false" class="fa fa-share" ng-disabled="CURRENT_USER==false"></i>
 						<i ng-click="edit_note(item)" ng-show="CURRENT_USER!=false" class="fa fa-pencil-square-o"></i>
 						<i ng-click="remove_note(item)" ng-show="CURRENT_USER!=false" class="fa fa-times"></i>
 					</div>
 					<p>{{item['_source']['comment']}}
-					<pre>{{item['_source']['code_note']}}</pre>
+					<pre highlight><code class="php">{{item['_source']['code_note']}}</code></pre>
 				</div>
 
 
