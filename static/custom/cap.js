@@ -1,5 +1,4 @@
 
-
 // CAPSULEFOR <angularjs_frame;OPEN>
 app = angular.module("app",['ui.router','ui.bootstrap','ngCookies']);
 
@@ -147,6 +146,15 @@ app.controller("MainController",function($scope,$http,$state,$cookies,$modal)
 		}
 
 
+	$scope.hide_menu = function()
+		{
+		$('.navbar-collapse').collapse('hide');
+	//	$('.first_preloader').css('display','block');
+		$('.first_preloader').removeClass('hide_preloader');
+		
+		}
+
+
 	})
 
 
@@ -210,6 +218,19 @@ app.controller('NotesController',function($scope,$http,$modal)
 
 		})
 
+
+	$scope.mobile_show = mobile_show;
+
+
+	function mobile_show()
+		{
+		var el = $('.switch_container');
+		if (!el.hasClass('open'))
+			el.addClass('open');	
+		else
+			el.removeClass('open');
+
+		}
 
 	})
 
@@ -1265,7 +1286,6 @@ app.directive('loginRegistr',function($http,$state)
 
 
 
-
 app.directive('cropImg',function($timeout)
 	{
 	return {
@@ -1274,6 +1294,7 @@ app.directive('cropImg',function($timeout)
 			{
 			scope.get_dimensions = get_dimensions;
 			scope.resize = resize;
+
 
 			var viewport = attr['cropImg']===''?false:true;
 
@@ -1286,7 +1307,6 @@ app.directive('cropImg',function($timeout)
 			//scope.get_dimensions();	
 			function get_dimensions()
 				{
-				
 				var parent_element = element.parent();
 				//!!! not conventional case - for safe case get transform property, cache it, remove, and return after all dimensions will be ready
 				var cache_transform_parent = parent_element.css('transform');
@@ -1357,6 +1377,7 @@ app.directive('cropImg',function($timeout)
 						'visibility':'visible'
 						});
 
+				$('.first_preloader').addClass('hide_preloader');
 
 
 				//debugger;
@@ -1400,7 +1421,8 @@ app.directive('animateScroll',function($window)
 				scope.finished = false; //animation is finished (prevent scrol handling)
 				}
 
-
+			
+		
 			//determine when to fire animation
 			$(window).scroll(function()
 				{
@@ -1412,9 +1434,12 @@ app.directive('animateScroll',function($window)
 					{
 					if (koef>when_scroll)
 						{
+					//	if (attrs['animateScroll']=='reduce'){debugger;}
 						$(el).addClass(attrs['animateScroll']); //set animated class
 						scope.finished = true;
 						scope.$apply();
+					//	if (attrs['animateScroll']=='reduce'){debugger;}
+						
 						}
 					return false
 					}
@@ -1441,9 +1466,47 @@ app.directive('animateScroll',function($window)
 
 
 
+app.directive('scrollUp',function()
+	{
+
+	return {
+
+	link:function(scope,element)
+		{
+		var scroll_pos = $('body').scrollTop();
+		//var flag = false;
+
+		function show_hide()
+			{
+
+			if (scroll_pos>50&&!element.hasClass('show'))
+				{element.addClass('show');flag = true}
+			if (scroll_pos<50&&element.hasClass('show'))
+				{element.removeClass('show');}
+				
+			}
+		show_hide();
+
+		console.log(scroll_pos);
+		element.on('click',function()
+			{
+			$('body').animate({'scrollTop':'0px'});
+			})
 
 
+		$(window).scroll(function()
+			{
+			//if (flag==true){return false};
+			scroll_pos = $('body').scrollTop();
+			console.log(scroll_pos);
+			show_hide();
+			})
 
+		}
+
+	}
+
+	})
 
 
 

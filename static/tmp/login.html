@@ -1,6 +1,7 @@
 <div class="login_container"
 	animate-scroll="reduce"
 	when-scroll="900"
+	ng-class="{'reduce':CURRENT_USER!=false}"	
 	>
 
 	<img class="bg_img"
@@ -10,6 +11,7 @@
 	<div class="bg_img_gradient"
 		animate-scroll="intro"
 		when-scroll="10"
+		ng-class={'intro':CURRENT_USER!=false&&CURRENT_USER!=undefined}
 		></div>
 	<div class="container">	
 		<div class="row">
@@ -26,7 +28,7 @@
 						<span class="title">
 						<span>Now you can add your own CODE NOTES!</span>
 						<br>
-						<a ui-sref="notes" class="btn btn-primary btn-lg">GoTo</a>				
+						<a ui-sref="notes" ng-click="hide_menu()" class="btn btn-primary btn-lg">GoTo</a>				
 					</div>
 
 					<!--not SIGNED users-->

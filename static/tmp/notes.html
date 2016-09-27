@@ -1,3 +1,4 @@
+
 <div class="notes_container">
 	<img src="./static/img/bg.jpg" crop-img="viewport">
 	<div class="search_block">
@@ -18,7 +19,7 @@
 			</form>
 		</div>
 
-		<div class="navs_container animated slideInUp">
+		<div class="navs_container">
 			<button type="button" ng-click="nav_state='quick_add'" ng-class="{active:nav_state=='quick_add'}" class="btn btn-default add_btn">
 				<i class="fa fa-plus-circle"></i> Quick Add
 			</button>
@@ -40,6 +41,8 @@
 <!--//////////////////////////////////////////////////////////////////////////////-->	
 
 	<div class="main_content" ng-switch-when="quick_add" ng-controller="QuickAddController">
+
+
 		<div class="page-header">
 			<h1>Quick Add Notes</h1>
 		</div>	
@@ -105,6 +108,7 @@
 
 
 	<div class="main_content" ng-switch-when="agenda" ng-controller="AgendaController">
+		<div class="scroll_top" scroll-up><span class="glyphicon glyphicon-circle-arrow-up"></span></div>
 		<div class="page-header">
 			<h1>Notes agenda
 
@@ -117,7 +121,10 @@
 		</div>	
 
 		<div class="content row">
-			<div class="col-md-3 left_col">
+			<div class="left_col">
+				<div class="mobile_menu" ng-click="mobile_show()">
+					<span class="glyphicon glyphicon-option-vertical"></span>
+				</div>
 				<ul class="nav nav-pills nav-stacked">
 					<i ng-show="section_loading" class="fa fa-spinner fa-spin"></i>
 					<li class="animated fadeIn" ng-repeat="item in sections" ng-class="{active:$parent.section_name['name']==item['name']}" ng-click="$parent.section_name = item"><a href="#">{{item.name}}</a></li>
@@ -127,8 +134,9 @@
 			</div>
 
 
-			<div class="col-sm-9 right_col">
+			<div class="right_col">
 				<h3 ng-show="sections.length!=0">&#167;{{section_name['name']}}
+					<br class="next_line">
 					<button ng-show="sections.length!=0&&CURRENT_USER!=false" ng-click="add_notes()" class="btn btn-success btn-xs" ng-disabled="sections.length==0">
 						<span class="glyphicon glyphicon-plus"></span> Notes
 					</button>

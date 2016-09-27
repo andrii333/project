@@ -10,14 +10,15 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<script src="./static/lib/angular.min.js"></script>
-	<script src="./static/lib/angular-ui-router.js"></script>
-	<script src="./static/lib/jquery.min.js"></script>
-	<script src="./static/custom/cap.js"></script>
-	<script src="./static/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="./static/lib/ui-bootstrap-tpls-0.14.3.js"></script>   
+	<script src="./static/lib/angular.min.js" defer></script>
+	<script src="./static/lib/angular-ui-router.js" defer></script>
+	<script src="./static/lib/jquery.min.js" defer></script>
+	<script src="./static/custom/cap.js" defer></script>
+	<script src="./static/lib/bootstrap/js/bootstrap.min.js" defer></script>
+	<script src="./static/lib/ui-bootstrap-tpls-0.14.3.js" defer></script>   
 <!--	<script src="./static/lib/angular-animate.min.js"></script>  -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+<!--	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script> -->
+	<script src="./static/lib/angular-cookies.js" defer></script> 
 
 	<link rel="stylesheet" type="text/css" href="./static/lib/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./static/custom/cap.css">
@@ -29,9 +30,115 @@
 
 </head>
 
+<!--FOR FAST PRELOADER -->
+	<style>
 
 
-<body>
+	.first_preloader
+		{
+		position:fixed;
+		top:0px;
+		left:0px;
+		width:100%;
+		height:100%;
+		background:black;
+		z-index:3050;
+
+		-opacity:0.3;
+		}
+
+
+	.first_preloader:after
+		{
+		content:'';
+		width:100px;
+		height:100px;
+		position:absolute;
+		top:0px;
+		bottom:0px;
+		left:0px;
+		right:0px;
+		margin:auto auto;
+		border-radius:150px;
+		border-width:4px 4px 4px 4px;
+		border-color:rgb(63, 63, 63) white rgb(63, 63, 63) white;
+		border-style:solid solid solid solid;
+
+		-webkit-animation:preloader ease 1s infinite;
+		-moz-animation:preloader ease 1s infinite;
+		animation:preloader ease 1s infinite;
+		}
+
+
+
+
+	@-webkit-keyframes preloader
+		{
+		from {transform:rotate(0deg)}
+		to {transform:rotate(-360deg)}
+		}
+
+	@-moz-keyframes preloader
+		{
+		from {transform:rotate(0deg)}
+		to {transform:rotate(-360deg)}
+		}
+
+	@keyframes preloader
+		{
+		from {transform:rotate(0deg)}
+		to {transform:rotate(-360deg)}
+		}
+
+
+
+
+	@-webkit-keyframes hide_preloader_anim
+		{
+		from {opacity:1}
+		to {opacity:0;visibility:hidden;}
+		}
+
+	@-moz-keyframes hide_preloader_anim
+		{
+		from {opacity:1}
+		to {opacity:0;visibility:hidden;}
+		}
+
+	@keyframes hide_preloader_anim
+		{
+		from {opacity:1}
+		to {opacity:0;visibility:hidden;}
+		}
+
+
+	.hide_preloader
+		{
+		-webkit-animation:hide_preloader_anim 0.8s ease;
+		-moz-animation:hide_reloader_anim 0.8s ease;
+		animation:hide_preloader_anim 0.8s ease;
+		animation-fill-mode:forwards;
+		-moz-animation-fill-mode:forwards;
+		-webkit-animation-fill-mode:forwards;
+		}
+
+
+
+
+	</style>
+
+	<script>
+		function some_function()
+			{
+			var first_preloader = document.getElementsByClassName('first_preloader')[0];	
+		//	first_preloader.style['display'] = 'none';
+		//	first_preloader.className = 'first_preloader hidden';
+			}
+	
+	</script>
+
+
+<body onload="some_function()">
 
 <div ng-controller="MainController">
 
@@ -49,15 +156,15 @@
 					<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand brand" ui-sref="login">It Shpora</a>
+				<a class="navbar-brand brand" ng-click="hide_menu()" ui-sref="login">It Shpora</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ui-sref-active="active"><a ui-sref="login">About</a></li>
-					<li ui-sref-active="active"><a ui-sref="notes">Notes</a></li>
-					<li ui-sref-active="active"><a ui-sref="contact">Contact</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="login">About</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="notes">Notes</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="contact">Contact</a></li>
 					<li class="question_icon" ng-if="CURRENT_USER" ng-click="question()">
 						<a href="#">
 							<i class="fa fa-question-circle"></i>
@@ -122,6 +229,12 @@
 </div>  <!--close wrap for MainController-->
 
 
+	<div class="img_fast_load">
+		<img src="./static/img/bg.jpg">
+	</div>
+
+	<div class="first_preloader">
+	</div>
 
 
 </body>
