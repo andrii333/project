@@ -125,12 +125,14 @@
 				<div class="mobile_menu" ng-click="mobile_show()">
 					<span class="glyphicon glyphicon-option-vertical"></span>
 				</div>
+				<div class="ul_container">
 				<ul class="nav nav-pills nav-stacked">
 					<i ng-show="section_loading" class="fa fa-spinner fa-spin"></i>
 					<li class="animated fadeIn" ng-repeat="item in sections" ng-class="{active:$parent.section_name['name']==item['name']}" ng-click="$parent.section_name = item"><a href="#">{{item.name}}</a></li>
 					
 					<div ng-show="!section_loading&&sections.length!=0" class="hor_line"></div>
 				</ul>
+				</div>
 			</div>
 
 
