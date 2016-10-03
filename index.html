@@ -165,9 +165,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="login">About</a></li>
-					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="notes">Notes</a></li>
-					<li ui-sref-active="active"><a ng-click="hide_menu()" ui-sref="contact">Contact</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menui('/about')" ui-sref="login">About</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menu('/notes')" ui-sref="notes">Notes</a></li>
+					<li ui-sref-active="active"><a ng-click="hide_menu('/contact')" ui-sref="contact">Contact</a></li>
 					<li class="question_icon" ng-if="CURRENT_USER" ng-click="question()">
 						<a href="#">
 							<i class="fa fa-question-circle"></i>

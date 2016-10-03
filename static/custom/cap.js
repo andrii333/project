@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider)
 	})
 
 
-app.controller("MainController",function($scope,$http,$state,$cookies,$modal)
+app.controller("MainController",function($scope,$http,$state,$cookies,$modal,$location)
 	{
 	//redirect to sign page, uf user is unsigned
 	if ($cookies.get('log_token')==undefined)
@@ -146,8 +146,9 @@ app.controller("MainController",function($scope,$http,$state,$cookies,$modal)
 		}
 
 
-	$scope.hide_menu = function()
+	$scope.hide_menu = function(path)
 		{
+		if (path===$location.$$path){return false}
 		$('.navbar-collapse').collapse('hide');
 	//	$('.first_preloader').css('display','block');
 		$('.first_preloader').removeClass('hide_preloader');
@@ -1331,7 +1332,6 @@ app.directive('cropImg',function($timeout)
 						'transform':'',
 						'visibility':'hidden'
 						});
-
 				if (viewport==false)
 					{
 					var parent_dimensions = parent_element[0].getBoundingClientRect();
@@ -1343,7 +1343,7 @@ app.directive('cropImg',function($timeout)
 					var h = window.innerHeight;
 					var w = window.innerWidth;
 					}
-
+				
 				var img_dimensions = element[0].getBoundingClientRect();
 				var h_img = img_dimensions['height'];
 				var w_img = img_dimensions['width'];
@@ -1372,7 +1372,6 @@ app.directive('cropImg',function($timeout)
 						});
 					}
 				//console.log(h,w,h_img,w_img,rate,new_w_img);
-				//debugger;	
 				//return previous state (transforms and visibility)
 				parent_element.css(
 					{
@@ -1530,6 +1529,100 @@ app.directive('highlight',function($timeout)
 	}
 
 
+	})
+
+
+
+app.directive('setHeight',function()
+	{
+	return {
+		compile:function()
+			{
+			return {
+			pre:function(scope,element,attrs)
+				{
+		
+				//append new div to retrive precise dimensions of viewport
+
+				scope.set_height = set_height;
+			
+				function set_height()
+					{
+					var block = $('.for_viewport_dim');
+					if (block.length==0)
+						{
+						var div = $('<div></div>');
+						div.addClass('for_viewport_dim');
+						div.css({'width':'100%','height':'100%','display':'none'});
+						$('html').append(div);
+						}
+
+					var height = attrs['setHeight'].replace('%','');
+					var viewport_height = $('.for_viewport_dim').height();
+					$(element).height(viewport_height*height/100);
+					}
+				scope.set_height();
+				//$(window).on('resize',scope.set_height);
+
+				},
+			post:function()
+				{
+
+
+				}
+
+			   }
+
+			}
+
+		}
+	})
+
+app.directive('setWidth',function()
+	{
+	return {
+
+		compile:function()
+			{
+			return {
+				pre:function(scope,element,attrs)
+					{
+
+					scope.set_width = set_width;
+
+
+					function set_width()
+						{
+						//append new div to retrive precise dimensions of viewport
+						var block = $('.for_viewport_dim');
+						if (block.length==0)
+							{
+							var div = $('<div></div>');
+							div.addClass('for_viewport_dim');
+							div.css({'width':'100%','height':'100%','display':'none'});
+							$('html').append(div);
+							}
+						var width = attrs['setWidth'].replace('%','');
+						var viewport_width = $('.for_viewport_dim').width();
+						$(element).width(viewport_width*width/100);
+						}
+					scope.set_width();
+				//	$(window).on('resize',scope.set_width);
+
+	
+					},
+				post:function()
+					{
+
+					}
+		
+
+			   	}
+
+			}
+
+
+		}
 	})
 
 
